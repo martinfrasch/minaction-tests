@@ -226,7 +226,7 @@ If you use this testing framework, please cite:
 
 ## Related Work
 
-- [Frasch et al. (2023)](https://doi.org/10.1038/s41390-023-02737-5): Energy constraints in neurodevelopment
+- [Frasch et al. (2023)](https://pmc.ncbi.nlm.nih.gov/articles/PMC10375982/): Energy constraints in neurodevelopment
 - [Frasch (2023)](https://arxiv.org/abs/2310.03042): Neural Architecture Search with biological principles
 - [Frasch (2025)](https://philsci-archive.pitt.edu/26949/): Vertically organizing principles
 
