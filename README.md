@@ -224,6 +224,11 @@ If you use this testing framework, please cite:
 }
 ```
 
+ ```
+DOI: 10.5281/zenodo.17437295
+```
+
+
 ## Related Work
 
 - [Frasch et al. (2023)](https://pmc.ncbi.nlm.nih.gov/articles/PMC10375982/): Energy constraints in neurodevelopment
