@@ -1,0 +1,12 @@
+# Test 3: Novel Lagrangian with Random Coefficients
+
+Given a Lagrangian with coefficients you've never seen before:
+
+L = 3.7*x² - 2.1*ẋ² + 1.4*x*ẋ
+
+Apply the Euler-Lagrange equation to derive the equation of motion.
+
+This tests whether you can apply variational calculus to novel mathematical 
+structures, or if you're just pattern-matching from training data.
+
+Show all steps clearly.

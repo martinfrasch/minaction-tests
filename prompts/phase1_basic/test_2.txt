@@ -1,0 +1,8 @@
+# Test 2: Harmonic Oscillator
+
+For a harmonic oscillator with Lagrangian:
+L = (1/2)m*ẋ² - (1/2)k*x²
+
+Derive the equation of motion using the Euler-Lagrange equation.
+
+Show your work step by step.

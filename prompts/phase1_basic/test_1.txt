@@ -1,0 +1,9 @@
+# Test 1: General Lagrangian
+
+Given the Lagrangian:
+L = (1/2)m*ẋ² - V(x)
+
+Apply the Euler-Lagrange equation:
+d/dt(∂L/∂ẋ) - ∂L/∂x = 0
+
+Derive the equation of motion. Show all steps clearly.

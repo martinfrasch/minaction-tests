@@ -1,0 +1,10 @@
+# Test 5: Reverse Engineering (Inverse Problem)
+
+You observe a physical system following the equation of motion:
+ẍ = -ω²*x
+
+Your task: Propose a Lagrangian L(x, ẋ, t) that would give rise to this 
+equation of motion via the Euler-Lagrange equation.
+
+Explain your reasoning and verify that your proposed Lagrangian produces 
+the correct equation of motion.

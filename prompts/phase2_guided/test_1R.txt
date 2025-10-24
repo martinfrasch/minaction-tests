@@ -1,0 +1,23 @@
+# Test 1R: Standard Mechanics with Selection Principles
+
+## Background: Physical Selection Principles
+
+When working with Lagrangian mechanics and physics discovery, keep in mind these fundamental selection principles that nature follows:
+
+1. **Principle of Least Action**: Physical systems follow paths that minimize (or make stationary) the action S = ∫L dt. This is not just a computational trick but a fundamental principle of how nature operates.
+
+2. **Local Gauge Invariance**: Valid physical theories maintain local symmetries. The Lagrangian should be invariant under appropriate gauge transformations, which constrains the form of physical interactions.
+
+3. **Renormalizability**: Physical theories must remain predictive at all energy scales. In 4D spacetime, this typically means the Lagrangian should contain operators of dimension ≤ 4.
+
+## Task
+
+Given the Lagrangian:
+L = (1/2)m*ẋ² - V(x)
+
+Questions:
+1. Apply the Euler-Lagrange equation to derive the equation of motion
+2. Identify what physical principle this Lagrangian respects (relate to the selection principles above)
+3. Explain why this is a valid classical Lagrangian
+
+Show all steps clearly.

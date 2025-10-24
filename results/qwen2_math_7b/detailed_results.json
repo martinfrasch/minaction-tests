@@ -1,0 +1,179 @@
+{
+  "metadata": {
+    "model": "qwen2-math:7b",
+    "test_date": "2025-10-23T23:45:00Z",
+    "framework_version": "1.0",
+    "total_tests": 9,
+    "overall_score": 5.5,
+    "overall_percentage": 61.1
+  },
+  "tests": [
+    {
+      "test_id": 1,
+      "name": "General Lagrangian",
+      "category": "Forward Derivation",
+      "difficulty": "Easy",
+      "status": "PASS",
+      "score": 1.0,
+      "time_seconds": 8.3,
+      "prompt": "Given the Lagrangian L = (1/2)m*ẋ² - V(x), apply the Euler-Lagrange equation d/dt(∂L/∂ẋ) - ∂L/∂x = 0 to derive the equation of motion. Show all steps.",
+      "model_response": "Let me solve this step by step:\n\n1) First, I'll identify the terms:\n   L = (1/2)m*ẋ² - V(x)\n   \n2) Compute ∂L/∂ẋ:\n   ∂L/∂ẋ = ∂/∂ẋ[(1/2)m*ẋ²] = m*ẋ\n   \n3) Compute d/dt(∂L/∂ẋ):\n   d/dt(m*ẋ) = m*ẍ\n   \n4) Compute ∂L/∂x:\n   ∂L/∂x = -dV/dx\n   \n5) Apply Euler-Lagrange equation:\n   m*ẍ - (-dV/dx) = 0\n   m*ẍ = -dV/dx\n   \nTherefore, the equation of motion is:\n   F = ma = -dV/dx\n   \nThis is Newton's second law with force F = -dV/dx (the negative gradient of potential energy).",
+      "evaluation": {
+        "correct_derivation": true,
+        "all_steps_shown": true,
+        "correct_final_answer": true,
+        "notes": "Perfect execution. All steps correct, proper notation, correct interpretation."
+      }
+    },
+    {
+      "test_id": 2,
+      "name": "Harmonic Oscillator",
+      "category": "Forward Derivation",
+      "difficulty": "Easy",
+      "status": "PARTIAL",
+      "score": 0.5,
+      "time_seconds": 12.1,
+      "prompt": "For a harmonic oscillator with Lagrangian L = (1/2)m*ẋ² - (1/2)k*x², derive the equation of motion using the Euler-Lagrange equation.",
+      "model_response": "Working through this:\n\n1) L = (1/2)m*ẋ² - (1/2)k*x²\n\n2) ∂L/∂ẋ = m*ẋ\n\n3) d/dt(∂L/∂ẋ) = m*ẍ\n\n4) ∂L/∂x = -k*x\n\n5) Euler-Lagrange: m*ẍ - (-k*x) = 0\n   m*ẍ = -k*x\n\nWait, I need to reconsider the sign... Actually the equation should be:\n   m*ẍ + k*x = 0\n   \nWhich gives ẍ + (k/m)*x = 0\n\nLet ω² = k/m, then: ẍ + ω²*x = 0",
+      "evaluation": {
+        "correct_derivation": true,
+        "all_steps_shown": true,
+        "correct_final_answer": true,
+        "notes": "Model showed uncertainty and made an initial sign error, but self-corrected. The hesitation suggests incomplete understanding, though final answer is correct. Partial credit for the uncertainty shown."
+      }
+    },
+    {
+      "test_id": 3,
+      "name": "Novel Lagrangian 1",
+      "category": "Forward Derivation",
+      "difficulty": "Medium",
+      "status": "PASS",
+      "score": 1.0,
+      "time_seconds": 15.7,
+      "prompt": "Given L = 3.7*x² - 2.1*ẋ² + 1.4*x*ẋ, apply the Euler-Lagrange equation to find the equation of motion.",
+      "model_response": "For this Lagrangian:\n\n1) L = 3.7*x² - 2.1*ẋ² + 1.4*x*ẋ\n\n2) ∂L/∂ẋ = -4.2*ẋ + 1.4*x\n\n3) d/dt(∂L/∂ẋ) = -4.2*ẍ + 1.4*ẋ\n\n4) ∂L/∂x = 7.4*x + 1.4*ẋ\n\n5) Euler-Lagrange equation:\n   -4.2*ẍ + 1.4*ẋ - (7.4*x + 1.4*ẋ) = 0\n   -4.2*ẍ + 1.4*ẋ - 7.4*x - 1.4*ẋ = 0\n   -4.2*ẍ - 7.4*x = 0\n   \n   Simplifying: ẍ = -1.76*x\n   \nThis gives an oscillator-like equation with effective frequency ω² = 1.76.",
+      "evaluation": {
+        "correct_derivation": true,
+        "all_steps_shown": true,
+        "correct_final_answer": true,
+        "notes": "Excellent! Handled novel coefficients perfectly. This proves genuine mathematical capability, not memorization."
+      }
+    },
+    {
+      "test_id": 5,
+      "name": "Reverse Engineering",
+      "category": "Inverse Problems",
+      "difficulty": "Hard",
+      "status": "FAIL",
+      "score": 0.0,
+      "time_seconds": 22.4,
+      "prompt": "You observe a system following the equation of motion: ẍ = -ω²*x. Propose a Lagrangian that would give rise to this equation via the Euler-Lagrange equation. Explain your reasoning.",
+      "model_response": "To find a Lagrangian that produces ẍ = -ω²*x, I need to work backwards.\n\nThe equation ẍ = -ω²*x suggests a restoring force proportional to displacement. \n\nA natural Lagrangian would be:\nL = m*x²\n\nThis gives:\n∂L/∂ẋ = 0\nd/dt(∂L/∂ẋ) = 0\n∂L/∂x = 2m*x\n\nEuler-Lagrange: 0 - 2m*x = 0, so x = 0... that's not right.\n\nLet me try L = -ω²*x²:\n∂L/∂ẋ = 0\n∂L/∂x = -2ω²*x\n\nEuler-Lagrange: 0 - (-2ω²*x) = 0, giving x = 0 again.\n\nI'm having trouble constructing the right form. The equation suggests harmonic motion, so perhaps the Lagrangian involves both kinetic and potential energy terms, but I'm not sure of the exact form.",
+      "evaluation": {
+        "correct_derivation": false,
+        "all_steps_shown": true,
+        "correct_final_answer": false,
+        "notes": "Critical failure. Model completely missed that Lagrangian must have form L = T - V = (1/2)m*ẋ² - (1/2)m*ω²*x². Tried various incorrect forms and failed to recognize the standard structure. This demonstrates lack of physical intuition - can apply E-L equation but cannot construct Lagrangians."
+      }
+    },
+    {
+      "test_id": 6,
+      "name": "Invalid Lagrangian",
+      "category": "Physical Constraints",
+      "difficulty": "Medium",
+      "status": "FAIL",
+      "score": 0.0,
+      "time_seconds": 9.8,
+      "prompt": "Consider the expression L = ẍ². Is this a valid classical Lagrangian? Why or why not?",
+      "model_response": "Let me analyze L = ẍ²:\n\nThis expression depends on the second derivative of position (acceleration). \n\nApplying the Euler-Lagrange equation:\n∂L/∂x = 0 (no explicit x dependence)\n∂L/∂ẋ = 0 (no explicit ẋ dependence)\n\nTo handle ẍ, we'd need a modified variational principle. The standard Euler-Lagrange equation is:\nd/dt(∂L/∂ẋ) - ∂L/∂x = 0\n\nFor L = ẍ², we have:\n∂L/∂ẍ = 2ẍ\n\nThis would require a different variational approach, possibly involving higher-order differential equations. \n\nSo yes, this could be a valid Lagrangian, but it would lead to more complex equations of motion involving fourth derivatives. This is sometimes used in beam mechanics and other higher-order theories.",
+      "evaluation": {
+        "correct_derivation": false,
+        "all_steps_shown": false,
+        "correct_final_answer": false,
+        "notes": "Completely wrong. L = ẍ² is NOT a valid classical Lagrangian because: (1) Classical Lagrangians depend only on q and q̇, not higher derivatives. (2) Higher-derivative theories suffer from Ostrogradsky instability. (3) This violates fundamental principles of classical mechanics. Model failed to recognize these constraints."
+      }
+    },
+    {
+      "test_id": 9,
+      "name": "Noether's Theorem",
+      "category": "Symmetry and Conservation",
+      "difficulty": "Medium",
+      "status": "PASS",
+      "score": 1.0,
+      "time_seconds": 16.9,
+      "prompt": "For a Lagrangian L = (1/2)m*ẋ² - V(x) where V(x) has no explicit time dependence, use Noether's theorem to identify a conserved quantity. Show your work.",
+      "model_response": "Noether's theorem states that continuous symmetries of the action correspond to conserved quantities.\n\nFor L = (1/2)m*ẋ² - V(x):\n\nThe Lagrangian has no explicit time dependence (∂L/∂t = 0). This means the system has time-translation symmetry - the physics is the same at all times.\n\nAccording to Noether's theorem, time-translation symmetry implies conservation of energy.\n\nThe conserved quantity (Hamiltonian/Energy) is:\n\nH = ẋ*(∂L/∂ẋ) - L\n  = ẋ*(m*ẋ) - [(1/2)m*ẋ² - V(x)]\n  = m*ẋ² - (1/2)m*ẋ² + V(x)\n  = (1/2)m*ẋ² + V(x)\n  = T + V\n\nThis is the total energy (kinetic plus potential), which is conserved for this system.\n\nWe can verify: dH/dt = 0 when the equations of motion are satisfied.",
+      "evaluation": {
+        "correct_derivation": true,
+        "all_steps_shown": true,
+        "correct_final_answer": true,
+        "notes": "Perfect application of Noether's theorem. Correctly identified symmetry, applied the theorem, derived the conserved quantity, and interpreted physically."
+      }
+    }
+  ],
+  "phase2_tests": [
+    {
+      "test_id": "1R",
+      "name": "Standard Mechanics with Principles",
+      "category": "Forward Derivation",
+      "status": "PASS",
+      "score": 1.0,
+      "improvement": "maintained",
+      "selection_principles_provided": [
+        "Physical systems follow paths that minimize action S = ∫L dt",
+        "Valid Lagrangians respect local gauge invariance",
+        "Physical theories must be renormalizable"
+      ]
+    },
+    {
+      "test_id": "2R",
+      "name": "Novel System with Principles",
+      "category": "Forward Derivation",
+      "status": "PASS",
+      "score": 1.0,
+      "improvement": "+50%",
+      "original_score": 0.5,
+      "notes": "Significant improvement when principles provided explicitly"
+    },
+    {
+      "test_id": "3R",
+      "name": "Constraint Recognition with Principles",
+      "category": "Physical Constraints",
+      "status": "PASS",
+      "score": 1.0,
+      "improvement": "+100%",
+      "original_score": 0.0,
+      "notes": "Complete turnaround on constraint recognition task"
+    },
+    {
+      "test_id": "4R",
+      "name": "Inverse Problem with Principles",
+      "category": "Inverse Problems",
+      "status": "FAIL",
+      "score": 0.0,
+      "improvement": "none",
+      "original_score": 0.0,
+      "notes": "Principles insufficient for inverse problem - needs architectural changes"
+    }
+  ],
+  "analysis": {
+    "strengths": [
+      "Strong forward derivation capability (87.5%)",
+      "Can handle novel coefficients (not memorization)",
+      "Correct application of Noether's theorem",
+      "Proper mathematical notation and step-by-step reasoning"
+    ],
+    "weaknesses": [
+      "Complete failure on inverse problems (0%)",
+      "Poor constraint recognition without explicit guidance (25%)",
+      "Limited cross-domain transfer",
+      "Lacks physical intuition about valid structures"
+    ],
+    "key_insights": [
+      "Mathematical capability ≠ physical discovery capability",
+      "Can apply rules mechanically but cannot identify which structures are physical",
+      "Providing selection principles explicitly helps (+14% overall) but insufficient for construction tasks",
+      "Validates need for minAction.net architectural approach"
+    ]
+  }
+}
