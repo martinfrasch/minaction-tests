@@ -2,8 +2,8 @@
 
 **Martin G. Frasch**¹'²
 
-¹Department of Obstetrics and Gynecology, University of Washington, Seattle, WA  
-²Health Stream Analytics LLC, Bothell, WA
+¹Institute on Human Development and Disability, University of Washington, Seattle, WA  
+²Health Stream Analytics LLC, Seattle, WA
 
 ---
 
@@ -23,19 +23,19 @@ This work represents a shift from data-driven pattern recognition toward physics
 
 ### 1.1 The Physics Discovery Problem
 
-The relationship between mathematical formalism and physical law remains one of science's deepest mysteries. Why does nature select certain mathematical structures—specific Lagrangians, particular symmetries, definite gauge groups—from the infinite space of mathematical possibilities? This "unreasonable effectiveness of mathematics" (Wigner, 1960) is not merely philosophical curiosity but has practical implications for artificial intelligence: can machines discover new physical laws, or are they limited to recognizing patterns in existing theories?
+The relationship between mathematical formalism and physical law remains one of science's deepest mysteries. Why does nature select certain mathematical structures—specific Lagrangians, particular symmetries, definite gauge groups—from the infinite space of mathematical possibilities? This "unreasonable effectiveness of mathematics" (Wigner, 1960) is not merely a philosophical curiosity but has practical implications for artificial intelligence: can machines discover new physical laws, or are they limited to recognizing patterns in existing theories?
 
 Recent advances in large language models (LLMs) have demonstrated remarkable capabilities in mathematical reasoning, symbolic manipulation, and even theorem proving. Yet these models fail at what might seem a simpler task: discovering basic physical laws from first principles. A model that can solve differential equations, manipulate tensors, and prove mathematical theorems cannot, for instance, recognize that F = ma emerges from action minimization or that gauge invariance constrains allowable interactions.
 
-This paper proposes a fundamental reason for this failure: current AI architectures lack the inductive bias toward physical realizability. Where biological intelligence evolved in direct interaction with physical constraints—learning that certain mathematical structures correspond to actionable predictions about the world—artificial systems learn from the products of this interaction (human-written text and equations) without access to the underlying selection process.
+This paper proposes a fundamental reason for this failure: current AI architectures lack the inductive bias toward physical realizability. Whereas biological intelligence evolved in direct interaction with physical constraints—learning that certain mathematical structures correspond to actionable predictions about the world, artificial systems learn from the products of this interaction (human-written text and equations) without access to the underlying selection process.
 
 ### 1.2 Current Approaches and Their Limitations
 
 Existing approaches to AI-driven scientific discovery fall into three categories:
 
-**Symbolic Regression**: Methods like genetic programming (Cranmer et al., 2020; Udrescu & Tegmark, 2020) search for equations that fit data. While successful for simple systems, they lack understanding of why certain functional forms are physically preferred. A symbolic regressor might find f(x) = ax² + bx + c fits planetary motion data, but it cannot recognize that this emerges from deeper principles (action minimization, gauge symmetry) that constrain physical theories.
+**Symbolic Regression**: Methods like genetic programming (Cranmer et al., 2020; Udrescu & Tegmark, 2020) search for equations that fit data. While successful for simple systems, they lack an understanding of why certain functional forms are physically preferred. A symbolic regressor might find f(x) = ax² + bx + c fits planetary motion data, but it cannot recognize that this emerges from deeper principles (action minimization, gauge symmetry) that constrain physical theories.
 
-**Neural Differential Equations**: Physics-informed neural networks (Raissi et al., 2019) and related approaches embed known equations into neural architectures. This is powerful for solving within existing theoretical frameworks but cannot discover new frameworks—the physics must be specified a priori.
+**Neural Differential Equations**: Physics-informed neural networks (Raissi et al., 2019) and related approaches embed known equations into neural architectures. This is powerful for solving within existing theoretical frameworks, but cannot discover new frameworks—the physics must be specified a priori.
 
 **Foundation Model Fine-Tuning**: Recent work attempts to adapt LLMs for scientific reasoning through fine-tuning on physics textbooks and research papers. Our empirical testing (Section 4) demonstrates this approach's fundamental limitation: models learn mathematical manipulation without physical intuition, achieving 61% on forward derivation but 0% on recognizing which mathematical structures are physically valid.
 
@@ -75,7 +75,7 @@ This paper proposes a framework, not a fully trained system. We provide:
 - Theoretical justification for why action principles should enable physics discovery
 - Architectural designs for implementing these principles
 - Validation protocols to test the hypothesis
-- Initial empirical evidence that current approaches lack necessary components
+- Initial empirical evidence that current approaches lack the necessary components
 
 We do not provide:
 - A trained minAction.net model (requires significant compute resources)
@@ -97,16 +97,16 @@ Action principles occupy a special place in physics—they are not merely conven
 - **General Relativity**: Einstein's field equations from δS = δ∫R√(-g)d⁴x = 0
 - **Quantum Field Theory**: The Standard Model from δS = δ∫L_SM d⁴x = 0
 
-This universality is not coincidental. Three deep principles suggest action minimization reflects fundamental constraints on physical realizability:
+This universality is not coincidental. Three deep principles suggest that action minimization reflects fundamental constraints on physical realizability:
 
 **Principle 1: Local Gauge Invariance**  
-Physical theories exhibit local symmetries (gauge transformations) that leave the action invariant. This is not optional—theories without proper gauge structure produce unphysical predictions (negative probabilities, causality violation). Action principles naturally encode gauge constraints through minimal coupling and covariant derivatives.
+Physical theories exhibit local symmetries (gauge transformations) that leave the action invariant. This is not optional—theories without a proper gauge structure produce unphysical predictions (negative probabilities, causality violation). Action principles naturally encode gauge constraints through minimal coupling and covariant derivatives.
 
 **Principle 2: Renormalizability**  
 Physical theories must remain predictive at all energy scales. Action principles with dimension ≤ 4 operators (in 4D spacetime) automatically ensure renormalizability, filtering out non-physical theories that predict infinite corrections.
 
 **Principle 3: Classical Limit**  
-Quantum theories must reduce to classical mechanics in appropriate limits (ℏ → 0). The path integral formulation shows this happens naturally: quantum amplitude = ∫e^(iS/ℏ)D[paths], where S is the classical action. The classical limit emerges from stationary phase approximation around S_minimum.
+Quantum theories must reduce to classical mechanics in appropriate limits (ℏ → 0). The path integral formulation shows this happens naturally: quantum amplitude = ∫e^(iS/ℏ)D[paths], where S is the classical action. The classical limit emerges from the stationary phase approximation around S_minimum.
 
 These three principles—gauge invariance, renormalizability, classical limit—are not arbitrary but reflect deep constraints on mathematically consistent theories that make contact with experiment. Action minimization is the common language in which these constraints are expressed.
 
@@ -342,11 +342,11 @@ class NetworkWeightedActionEvaluator(nn.Module):
 
 ## 4. Empirical Validation with Existing Mathematical Language Models
 
-[Content from empirical_validation.md integrated here - see empirical_validation.md for full details]
+[see empirical_validation.md for full details]
 
 ### 4.1 Motivation
 
-Before investing in training minAction.net, we tested whether existing mathematical language models possess the capabilities needed for physics discovery. Specifically, can state-of-the-art math LLMs:
+Before investing in training minAction.net, we tested whether existing mathematical language models possess the capabilities needed for physics discovery. Specifically, can state-of-the-art mathematical LLMs:
 
 1. Apply variational calculus (Euler-Lagrange equation)?
 2. Recognize which mathematical structures are physically valid?
@@ -382,7 +382,7 @@ Before investing in training minAction.net, we tested whether existing mathemati
 
 **Mathematical capability ≠ Physical intuition**
 
-The model can manipulate equations mechanically but cannot:
+The model can manipulate equations mechanically, but cannot:
 - Identify which structures are physically realizable
 - Construct new Lagrangians to match observations (0% on inverse problems)
 - Extend principles to new domains reliably
@@ -410,8 +410,8 @@ To validate that network-weighted action training improves physics discovery, we
 
 **Level 3: Field Theory** (Target: >50% accuracy)
 - Construct renormalizable Lagrangians for scalar fields
-- Identify spontaneous symmetry breaking patterns
-- Predict goldstone bosons from broken symmetries
+- Identify spontaneous symmetry-breaking patterns
+- Predict Goldstone bosons from broken symmetries
 
 **Level 4: Novel Discovery** (Success = any non-trivial discovery)
 - Propose Lagrangians for systems with no established theory
@@ -438,7 +438,7 @@ To validate that network-weighted action training improves physics discovery, we
 **Months 1-3**: Implement architecture, train on classical mechanics
 **Months 4-6**: Evaluate on Level 1-2 benchmarks, compare to baselines  
 **Months 7-12**: Scale to field theory (Level 3), attempt novel discovery (Level 4)
-**Months 12+**: Refine based on results, pursue experimental validation if discoveries made
+**Months 12+**: Refine based on results, pursue experimental validation if discoveries are made
 
 ---
 
@@ -461,16 +461,14 @@ While this paper focuses on physics discovery, the minAction.net principle exten
 
 ### 6.2 Application: Fetal Monitoring and Health Prediction
 
-The author's work on prenatal/postpartum depression prediction using machine learning (Frasch et al., 2024) exemplifies biological action principles:
-
-**Network**: Maternal-fetal physiological coupling
-**Optimization Target**: Minimize prediction error for adverse outcomes (depression, preterm birth)
-**Action-Minimizing Architecture**: Models that respect physiological constraints (heart rate variability, hormone dynamics) outperform unconstrained pattern matching
+**Network**: Maternal-fetal physiological coupling (Lobmaier et al. (2020))
+**Optimization Target**: Minimize prediction error for adverse outcomes under energy constraints (neurodevelopmental trajectories) (Chertoff et al. (2025))
+**Action-Minimizing Architecture**: Models that respect physiological constraints (e.g., heart rate variability, hormone dynamics) should outperform unconstrained pattern matching
 
 This suggests a unified framework:
 - **Physics**: Action minimization over spacetime networks
 - **Biology**: Action minimization over genetic/metabolic/neural networks
-- **AI**: Action minimization over computational networks
+- **AI**: Action minimization over computational networks (Emin/Imax) (Frasch (2023))
 
 ---
 
@@ -495,7 +493,7 @@ This suggests a unified framework:
 
 **Penrose Three-Worlds**:
 - Penrose (2004): "The Road to Reality"
-- Our contribution: Formalization as trainable ML objective
+- Our contribution: Formalization as a trainable ML objective
 
 **Action Principles**:
 - Feynman & Hibbs (1965): Path integral formulation
@@ -509,7 +507,7 @@ This suggests a unified framework:
 
 ### 7.3 Autodidactic Universe and Related Proposals
 
-Smolin et al. (2024) proposed that the universe learns its own laws through evolutionary dynamics, where physical laws emerge from an optimization process operating on the universe itself. This shares deep conceptual connections with our work:
+Alexander et al. (2024) proposed that the universe learns its own laws through evolutionary dynamics, where physical laws emerge from an optimization process operating on the universe itself. This shares deep conceptual connections with our work:
 
 **Similarities**:
 - Both propose that physical laws arise from optimization/selection processes
@@ -519,9 +517,9 @@ Smolin et al. (2024) proposed that the universe learns its own laws through evol
 **Differences**:
 - Autodidactic Universe: Laws evolve cosmologically over time
 - minAction.net: AI discovers existing laws through action-minimization training
-- Their framework applies to fundamental cosmology; ours to AI architecture
+- Their framework applies to fundamental cosmology; ours to AI architecture (but may apply to cosmology)
 
-**Complementarity**: If Smolin is correct that the universe is autodidactic (laws evolving), then minAction.net provides a framework for AI to track this evolution—learning the meta-principles by which laws are selected rather than specific fixed laws.
+**Complementarity**: If Alexander et al. are correct that the universe is autodidactic (laws evolving), then minAction.net provides a framework for AI to track this evolution — learning the meta-principles by which laws are selected rather than specific fixed laws.
 
 ---
 
@@ -533,21 +531,21 @@ Smolin et al. (2024) proposed that the universe learns its own laws through evol
 Deep learning success stories (CNNs for vision, Transformers for language) succeed because architectural biases match problem structure. Action-minimization provides the right bias for physics.
 
 **Argument 2: Physics Discovery Is Optimization**  
-Historically, physics advanced by finding simpler, more unified descriptions (Newton unifying terrestrial and celestial mechanics, Maxwell unifying electricity and magnetism, Einstein unifying space and time). This is precisely an action-minimization process—seeking theories that achieve more with less.
+Historically, physics advanced by finding simpler, more unified descriptions (Newton unifying terrestrial and celestial mechanics, Maxwell unifying electricity and magnetism, Einstein unifying space and time). This is precisely an action-minimization process — seeking theories that achieve more with less.
 
 **Argument 3: Biological Precedent**  
-Human physical intuition emerged from evolution under physical constraints. We propose artificial systems can develop similar intuition through training under action-minimizing constraints.
+Human physical intuition emerged from evolution under physical constraints. We propose that artificial systems can develop similar intuition through training under action-minimizing constraints.
 
 ### 8.2 Why This Might Not Work
 
 **Objection 1: Action Principles Are Not Sufficient**  
-Perhaps physics requires more than action minimization—additional principles not captured by our framework (e.g., anthropic reasoning, computational constraints, quantum information bounds).
+Perhaps physics requires more than action minimization — additional principles not captured by our framework (e.g., anthropic reasoning, computational constraints, quantum information bounds).
 
 **Objection 2: Computational Intractability**  
-Maybe the space of mathematical structures (M) is too vast to search efficiently, even with action-based guidance. Physics discovery might require human creativity that cannot be captured in training objectives.
+Maybe the space of mathematical structures (M) is too vast to search efficiently, even with action-based guidance. Physics discovery might require human creativity that cannot be captured in training objectives. Consider Gödel's incompleteness theorem (Gödel (1931)).
 
 **Objection 3: Generalization Failure**  
-The framework might work for classical mechanics (where action principles are well-understood) but fail for quantum field theory, general relativity, or beyond-Standard-Model physics where the correct action is unknown.
+The framework might work for classical mechanics (where action principles are well-understood), but fail for quantum field theory, general relativity, or beyond-Standard-Model physics where the correct action is unknown.
 
 ### 8.3 Intellectual Honesty: What We Have Not Proven
 
@@ -556,7 +554,7 @@ This paper proposes a framework and provides preliminary evidence. We have NOT:
 ✗ Trained a full minAction.net model  
 ✗ Demonstrated novel physics discovery  
 ✗ Proven that action principles are sufficient for AI physics discovery  
-✗ Shown this works beyond classical mechanics
+✗ Shown that this works beyond classical mechanics
 
 What we HAVE provided:
 
@@ -574,7 +572,7 @@ What we HAVE provided:
 - Publish results (positive or negative)
 
 **Medium Term** (3-5 years):
-- Scale to electromagnetism and field theory if initial results positive
+- Scale to electromagnetism and field theory if initial results are positive
 - Test transfer learning across physical domains
 - Attempt novel discoveries in unexplained phenomena
 
@@ -598,6 +596,10 @@ This work represents a shift from data-driven pattern recognition toward princip
 
 ## References
 
+Alexander, L., et al. (2024). The Autodidactic Universe. *arXiv:2104.03902 [hep-th]*.
+
+Chertoff, M., et al. (2025). Future of Brain Health: From Developmental Insights to Clinical Translation. *arXiv:2509.21332 [q-bio.NC]*
+
 Cranmer, M., Sanchez-Gonzalez, A., Battaglia, P., Xu, R., Cranmer, K., Spergel, D., & Ho, S. (2020). Discovering symbolic models from deep learning with inductive biases. *NeurIPS*, 33, 17429-17442.
 
 Davies, A., Veličković, P., Buesing, L., Blackwell, S., Zheng, D., Tomašev, N., ... & Kohli, P. (2021). Advancing mathematics by guiding human intuition with AI. *Nature*, 600(7887), 70-74.
@@ -606,15 +608,17 @@ Feynman, R. P., & Hibbs, A. R. (1965). *Quantum mechanics and path integrals*. M
 
 Flamholz, A., Noor, E., Bar-Even, A., & Milo, R. (2013). Glycolytic strategy as a tradeoff between energy yield and protein cost. *PNAS*, 110(24), 10039-10044.
 
-Frasch, M. G., et al. (2024). Machine learning for prenatal depression screening using PRAMS data. [In preparation]
+Frasch, M. G., et al. (2023). Brain development dictates energy constraints on neural architecture search: cross-disciplinary insights on optimization strategies. *arXiv:2310.03042 [q-bio.NC]*
+
+Gödel, K. (1931). Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme. I. Monatshefte für Mathematik und Physik, 38(1), 173–198.
 
 Liu, H., Simonyan, K., & Yang, Y. (2019). DARTS: Differentiable architecture search. *ICLR*.
+
+Lobmaier, S. M., et al. (2020). Fetal heart rate variability responsiveness to maternal stress, non-invasively detected from maternal transabdominal ECG. *Arch Gynecol Obstet*. 2020 Feb;301(2):405-414. doi: 10.1007/s00404-019-05390-8. Epub 2019 Nov 28.
 
 Penrose, R. (2004). *The road to reality: A complete guide to the laws of the universe*. Jonathan Cape.
 
 Raissi, M., Perdikaris, P., & Karniadakis, G. E. (2019). Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations. *Journal of Computational Physics*, 378, 686-707.
-
-Smolin, L., et al. (2024). The Autodidactic Universe. *arXiv preprint arXiv:2407.xxxxx*.
 
 Udrescu, S. M., & Tegmark, M. (2020). AI Feynman: A physics-inspired method for symbolic regression. *Science Advances*, 6(16), eaay2631.
 
@@ -740,6 +744,6 @@ class MyNewTest(BaseTest):
 
 ---
 
-*Manuscript version: 1.0*  
-*Last updated: October 23, 2025*  
+*Manuscript version: 1.1*  
+*Last updated: October 24, 2025*  
 *Correspondence: mfrasch@uw.edu*
