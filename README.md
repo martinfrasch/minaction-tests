@@ -225,7 +225,7 @@ If you use this testing framework, please cite:
 ```
 
  ```
-DOI: 10.5281/zenodo.17437295
+[DOI: 10.5281/zenodo.17437295](https://doi.org/10.5281/zenodo.17437295)
 ```
 
 
