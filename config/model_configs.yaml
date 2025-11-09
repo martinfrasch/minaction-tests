@@ -67,39 +67,32 @@ models:
       category: "open-source"
       tested: false
 
-  # OpenAI models (API required)
-  openai:
-    - name: "gpt-4o"
-      display_name: "GPT-4o"
-      description: "Latest multimodal flagship model"
+  # Google Gemini models (API required)
+  gemini:
+    - name: "gemini-2.0-flash-exp"
+      display_name: "Gemini 2.0 Flash (Experimental)"
+      description: "Latest experimental Gemini model with enhanced reasoning"
       size: "Unknown"
       category: "proprietary-frontier"
       tested: false
 
-    - name: "gpt-4o-mini"
-      display_name: "GPT-4o Mini"
-      description: "Efficient GPT-4 variant"
+    - name: "gemini-1.5-pro"
+      display_name: "Gemini 1.5 Pro"
+      description: "Flagship Gemini model with long context"
+      size: "Unknown"
+      category: "proprietary-frontier"
+      tested: false
+
+    - name: "gemini-1.5-flash"
+      display_name: "Gemini 1.5 Flash"
+      description: "Fast and efficient Gemini variant"
       size: "Unknown"
       category: "proprietary-efficient"
       tested: false
 
-    - name: "gpt-4-turbo"
-      display_name: "GPT-4 Turbo"
-      description: "Enhanced GPT-4 with larger context"
-      size: "Unknown"
-      category: "proprietary-frontier"
-      tested: false
-
-    - name: "gpt-4"
-      display_name: "GPT-4"
-      description: "Original GPT-4 model"
-      size: "Unknown"
-      category: "proprietary-frontier"
-      tested: false
-
-    - name: "gpt-3.5-turbo"
-      display_name: "GPT-3.5 Turbo"
-      description: "Previous generation model"
+    - name: "gemini-1.0-pro"
+      display_name: "Gemini 1.0 Pro"
+      description: "Original Gemini Pro model"
       size: "Unknown"
       category: "proprietary-baseline"
       tested: false
@@ -163,7 +156,7 @@ test_configs:
   quick_comparison:
     description: "Quick test with diverse architectures"
     models:
-      - "gpt-4o-mini"
+      - "gemini-1.5-flash"
       - "claude-3-haiku-20240307"
       - "qwen2-math:7b"
       - "llama3.1:8b"
@@ -171,7 +164,7 @@ test_configs:
   frontier_comparison:
     description: "Test frontier/flagship models"
     models:
-      - "gpt-4o"
+      - "gemini-1.5-pro"
       - "claude-3-5-sonnet-20241022"
       - "llama3.1:70b"
       - "mistral-large:latest"
@@ -191,7 +184,7 @@ test_configs:
       - "qwen2-math:7b"
       - "qwen2.5:72b"
       - "deepseek-math:7b"
-      - "gpt-4o"
+      - "gemini-1.5-pro"
 
   size_scaling:
     description: "Test effect of model size"
@@ -208,9 +201,10 @@ test_configs:
 
 # API configuration
 api_requirements:
-  openai:
-    env_var: "OPENAI_API_KEY"
-    base_url: "https://api.openai.com/v1"
+  gemini:
+    env_var: "GEMINI_API_KEY"
+    alternative_env_var: "GOOGLE_API_KEY"
+    base_url: "https://generativelanguage.googleapis.com"
 
   anthropic:
     env_var: "ANTHROPIC_API_KEY"

@@ -15,8 +15,8 @@ The testing infrastructure now supports:
 ### 1. Test a Single Model
 
 ```bash
-# Test with OpenAI GPT-4o
-python scripts/run_tests.py --model gpt-4o --suite complete --output results/gpt4o
+# Test with Google Gemini 1.5 Pro
+python scripts/run_tests.py --model gemini-1.5-pro --suite complete --output results/gemini
 
 # Test with Claude 3.5 Sonnet
 python scripts/run_tests.py --model claude-3-5-sonnet-20241022 --suite complete
@@ -35,7 +35,7 @@ python scripts/run_batch_tests.py --config frontier_comparison --suite complete
 python scripts/run_batch_tests.py --config open_source_comparison --suite complete
 
 # Test specific models
-python scripts/run_batch_tests.py --models gpt-4o claude-3-5-sonnet-20241022 llama3.1:70b
+python scripts/run_batch_tests.py --models gemini-1.5-pro claude-3-5-sonnet-20241022 llama3.1:70b
 ```
 
 ### 3. Compare Results
@@ -55,14 +55,13 @@ python scripts/compare_models.py --input results/batch --visualize --output-dir 
 
 ### Proprietary Models (API Required)
 
-#### OpenAI
-- `gpt-4o` - Latest flagship model
-- `gpt-4o-mini` - Efficient variant
-- `gpt-4-turbo` - Enhanced GPT-4
-- `gpt-4` - Original GPT-4
-- `gpt-3.5-turbo` - Previous generation
+#### Google Gemini
+- `gemini-2.0-flash-exp` - Latest experimental Gemini
+- `gemini-1.5-pro` - Flagship Gemini with long context (recommended)
+- `gemini-1.5-flash` - Fast and efficient variant
+- `gemini-1.0-pro` - Original Gemini Pro
 
-**Setup**: Set `OPENAI_API_KEY` environment variable
+**Setup**: Set `GEMINI_API_KEY` or `GOOGLE_API_KEY` environment variable
 
 #### Anthropic Claude
 - `claude-3-5-sonnet-20241022` - Latest Claude (recommended)
@@ -107,14 +106,14 @@ Pre-configured test suites in `config/model_configs.yaml`:
 
 ### `quick_comparison`
 Fast test with diverse architectures (4 models)
-- GPT-4o Mini
+- Gemini 1.5 Flash
 - Claude 3 Haiku
 - Qwen2-Math 7B
 - Llama 3.1 8B
 
 ### `frontier_comparison`
 Flagship models from major providers (4 models)
-- GPT-4o
+- Gemini 1.5 Pro
 - Claude 3.5 Sonnet
 - Llama 3.1 70B
 - Mistral Large
@@ -132,7 +131,7 @@ Math-focused models (4 models)
 - Qwen2-Math 7B
 - Qwen2.5 72B
 - DeepSeek-Math 7B
-- GPT-4o
+- Gemini 1.5 Pro
 
 ### `size_scaling`
 Test effect of model size (5 models)
@@ -164,7 +163,7 @@ Tests physical intuition and constraint understanding
 
 ```bash
 # Set API keys
-export OPENAI_API_KEY="sk-..."
+export GEMINI_API_KEY="your-key"
 export ANTHROPIC_API_KEY="sk-ant-..."
 
 # Run batch test
@@ -205,12 +204,12 @@ python scripts/compare_models.py \
 ```bash
 # Test specific models of interest
 python scripts/run_batch_tests.py \
-  --models gpt-4o gpt-4-turbo gpt-3.5-turbo \
+  --models gemini-1.5-pro gemini-1.5-flash gemini-1.0-pro \
   --suite understanding_only \
-  --output results/gpt_comparison
+  --output results/gemini_comparison
 
 # Compare
-python scripts/compare_models.py --input results/gpt_comparison
+python scripts/compare_models.py --input results/gemini_comparison
 ```
 
 ### Example 4: Size Scaling Study
@@ -235,7 +234,7 @@ python scripts/compare_models.py \
 
 ```
 results/batch/
-├── gpt-4o_complete.json          # Full results with prompts/responses
+├── gemini-1.5-pro_complete.json  # Full results with prompts/responses
 ├── claude-3-5-sonnet_complete.json
 └── llama3.1_70b_complete.json
 ```
@@ -253,7 +252,7 @@ Each file contains:
   "test_suite": "complete",
   "total_models": 4,
   "successful_models": 4,
-  "models_tested": ["gpt-4o", "claude-3-5-sonnet-20241022", ...],
+  "models_tested": ["gemini-1.5-pro", "claude-3-5-sonnet-20241022", ...],
   "results": [...]
 }
 ```
@@ -263,7 +262,7 @@ Each file contains:
 #### CSV Format
 ```csv
 Model,Overall Score,Passed,Failed,forward_derivation,inverse_problems,...
-gpt-4o,0.85,7,2,0.95,0.60,...
+gemini-1.5-pro,0.85,7,2,0.95,0.60,...
 claude-3-5-sonnet,0.82,7,2,0.92,0.55,...
 ```
 
@@ -274,7 +273,7 @@ claude-3-5-sonnet,0.82,7,2,0.92,0.55,...
 ## Summary
 | Model | Overall Score | Passed | Failed |
 |-------|---------------|--------|--------|
-| gpt-4o | 85.0% | 7 | 2 |
+| gemini-1.5-pro | 85.0% | 7 | 2 |
 ...
 ```
 
@@ -312,7 +311,7 @@ python scripts/run_tests.py --model your-new-model:tag
 
 The system auto-detects the provider:
 - Contains `:` → Ollama
-- Starts with `gpt` → OpenAI
+- Starts with `gemini` → Google Gemini
 - Starts with `claude` → Anthropic
 - Otherwise → HuggingFace
 
@@ -351,7 +350,7 @@ Models typically show:
 ### For API Models
 - Use `--suite forward_only` for cheaper initial testing
 - Set `--continue-on-error` to avoid stopping on failures
-- Use `gpt-4o-mini` or `claude-3-haiku` for cost-effective testing
+- Use `gemini-1.5-flash` or `claude-3-haiku` for cost-effective testing
 
 ### For Local Models
 - Ensure sufficient RAM (70B models need ~40GB)
@@ -367,7 +366,7 @@ Models typically show:
 
 ### API Key Errors
 ```bash
-export OPENAI_API_KEY="sk-..."
+export GEMINI_API_KEY="your-key"
 export ANTHROPIC_API_KEY="sk-ant-..."
 ```
 
@@ -403,7 +402,7 @@ Investigate if model size correlates with physical understanding
 Test if math-specialized models outperform general models
 
 ### 4. Provider Comparison
-Compare OpenAI vs Anthropic vs open-source on understanding tasks
+Compare Google Gemini vs Anthropic vs open-source on understanding tasks
 
 ### 5. Hypothesis Validation
 Replicate paper findings across modern architectures

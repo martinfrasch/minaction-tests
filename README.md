@@ -178,20 +178,20 @@ Overall: 5.5/9 = 61%
 
 - **Ollama**: Local models (recommended for reproduction)
 - **HuggingFace**: Direct transformer access
-- **OpenAI API**: GPT-3.5/4
+- **Google Gemini API**: Gemini models (1.5 Pro, Flash, etc.)
 - **Anthropic API**: Claude models
 - **Custom**: Implement `BaseModelInterface`
 
-### Example: Testing GPT-4
+### Example: Testing Gemini
 
 ```python
-from src.model_interface import OpenAIInterface
+from src.model_interface import GeminiInterface
 
 # Set API key in environment
-os.environ['OPENAI_API_KEY'] = 'your-key'
+os.environ['GEMINI_API_KEY'] = 'your-key'
 
-model = OpenAIInterface("gpt-4")
-results = run_complete_suite(model, output_dir="results/gpt4")
+model = GeminiInterface("gemini-1.5-pro")
+results = run_complete_suite(model, output_dir="results/gemini")
 ```
 
 ## Multi-Model Testing
@@ -201,8 +201,8 @@ results = run_complete_suite(model, output_dir="results/gpt4")
 ### Quick Multi-Model Testing
 
 ```bash
-# Test frontier models (GPT-4o, Claude 3.5 Sonnet, etc.)
-export OPENAI_API_KEY="sk-..."
+# Test frontier models (Gemini 1.5 Pro, Claude 3.5 Sonnet, etc.)
+export GEMINI_API_KEY="your-key"
 export ANTHROPIC_API_KEY="sk-ant-..."
 python scripts/run_batch_tests.py --config frontier_comparison
 
@@ -216,7 +216,7 @@ python scripts/compare_models.py --input results/batch --visualize
 ### Available Model Architectures
 
 **Proprietary Models**:
-- OpenAI: GPT-4o, GPT-4-Turbo, GPT-4, GPT-3.5-Turbo
+- Google Gemini: Gemini 2.0 Flash, Gemini 1.5 Pro, Gemini 1.5 Flash, Gemini 1.0 Pro
 - Anthropic: Claude 3.5 Sonnet, Claude 3 Opus, Claude 3 Sonnet, Claude 3 Haiku
 
 **Open-Source Models** (via Ollama):
@@ -247,7 +247,7 @@ See [docs/MULTI_MODEL_TESTING.md](docs/MULTI_MODEL_TESTING.md) for:
 ```bash
 # Test different architectures
 python scripts/run_batch_tests.py \
-  --models gpt-4o claude-3-5-sonnet-20241022 llama3.1:70b mixtral:8x7b \
+  --models gemini-1.5-pro claude-3-5-sonnet-20241022 llama3.1:70b mixtral:8x7b \
   --suite complete \
   --output results/arch_comparison
 
