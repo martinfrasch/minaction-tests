@@ -219,7 +219,7 @@ If you use this testing framework, please cite:
 @article{frasch2025variational,
   title={Variational Principles as Vertical Organizers: Testing Physical Understanding in Mathematical Language Models},
   author={Frasch, Martin G.},
-  journal={arXiv preprint arXiv:xxxx.xxxxx},
+  journal={zenodo [preprint] (https://doi.org/10.5281/zenodo.17437295)},
   year={2025}
 }
 ```
