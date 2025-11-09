@@ -38,6 +38,10 @@ minAction-LLM-physics-tests/
 ├── README.md                          # This file
 ├── requirements.txt                    # Python dependencies
 ├── LICENSE                            # MIT License
+├── config/
+│   └── model_configs.yaml            # 20+ LLM architecture configurations
+├── docs/
+│   └── MULTI_MODEL_TESTING.md        # Complete multi-model testing guide
 ├── paper/
 │   ├── manuscript.md                  # Full paper with results
 │   └── empirical_validation.md        # Detailed test results
@@ -59,6 +63,7 @@ minAction-LLM-physics-tests/
 │   └── phase2_guided/                # With explicit selection principles
 ├── results/
 │   ├── qwen2_math_7b/               # Our results
+│   ├── batch/                        # Multi-model batch results
 │   └── template/                     # Template for new model tests
 ├── notebooks/
 │   ├── 01_reproduce_results.ipynb    # Reproduce our findings
@@ -66,6 +71,8 @@ minAction-LLM-physics-tests/
 │   └── 03_analyze_failures.ipynb     # Deep dive into failures
 └── scripts/
     ├── run_tests.py                  # Main test runner
+    ├── run_batch_tests.py            # Multi-model batch testing
+    ├── compare_models.py             # Comparative analysis & visualization
     ├── analyze_results.py            # Generate statistics
     └── test_selection_principles.sh  # Bash script for phase 2 tests
 ```
@@ -171,21 +178,92 @@ Overall: 5.5/9 = 61%
 
 - **Ollama**: Local models (recommended for reproduction)
 - **HuggingFace**: Direct transformer access
-- **OpenAI API**: GPT-3.5/4
+- **Google Gemini API**: Gemini models (1.5 Pro, Flash, etc.)
 - **Anthropic API**: Claude models
 - **Custom**: Implement `BaseModelInterface`
 
-### Example: Testing GPT-4
+### Example: Testing Gemini
 
 ```python
-from src.model_interface import OpenAIInterface
+from src.model_interface import GeminiInterface
 
 # Set API key in environment
-os.environ['OPENAI_API_KEY'] = 'your-key'
+os.environ['GEMINI_API_KEY'] = 'your-key'
 
-model = OpenAIInterface("gpt-4")
-results = run_complete_suite(model, output_dir="results/gpt4")
+model = GeminiInterface("gemini-1.5-pro")
+results = run_complete_suite(model, output_dir="results/gemini")
 ```
+
+## Multi-Model Testing
+
+**NEW**: The repository now supports batch testing across 20+ sophisticated LLM architectures!
+
+### Quick Multi-Model Testing
+
+```bash
+# Test frontier models (Gemini 1.5 Pro, Claude 3.5 Sonnet, etc.)
+export GEMINI_API_KEY="your-key"
+export ANTHROPIC_API_KEY="sk-ant-..."
+python scripts/run_batch_tests.py --config frontier_comparison
+
+# Test open-source models (Llama 3.1, Mixtral, etc.)
+python scripts/run_batch_tests.py --config open_source_comparison
+
+# Compare results
+python scripts/compare_models.py --input results/batch --visualize
+```
+
+### Available Model Architectures
+
+**Proprietary Models**:
+- Google Gemini: Gemini 2.0 Flash, Gemini 1.5 Pro, Gemini 1.5 Flash, Gemini 1.0 Pro
+- Anthropic: Claude 3.5 Sonnet, Claude 3 Opus, Claude 3 Sonnet, Claude 3 Haiku
+
+**Open-Source Models** (via Ollama):
+- Math-Specialized: Qwen2-Math 7B, Qwen2.5 72B, DeepSeek-Math 7B
+- General: Llama 3.1 (70B/8B/3B), Phi-3 14B
+- Advanced: Mistral Large 123B, Mixtral 8x7B (MoE)
+
+### Pre-Configured Test Suites
+
+- `quick_comparison`: Fast test with 4 diverse models
+- `frontier_comparison`: Flagship models from major providers
+- `open_source_comparison`: Comprehensive open-source evaluation
+- `math_specialized`: Math-focused models
+- `size_scaling`: Test effect of model size
+
+### Complete Documentation
+
+See [docs/MULTI_MODEL_TESTING.md](docs/MULTI_MODEL_TESTING.md) for:
+- Detailed setup instructions
+- Complete model list and configurations
+- Batch testing workflows
+- Comparative analysis guide
+- Performance optimization tips
+- Research applications
+
+### Example: Compare Architecture Types
+
+```bash
+# Test different architectures
+python scripts/run_batch_tests.py \
+  --models gemini-1.5-pro claude-3-5-sonnet-20241022 llama3.1:70b mixtral:8x7b \
+  --suite complete \
+  --output results/arch_comparison
+
+# Generate comparison report with visualizations
+python scripts/compare_models.py \
+  --input results/arch_comparison \
+  --export results/comparison.csv \
+  --visualize \
+  --detailed
+```
+
+This produces:
+- Comparative performance tables
+- Category-wise analysis (forward vs. understanding tasks)
+- Heat maps showing model strengths/weaknesses
+- Statistical analysis across architectures
 
 ## Theoretical Background
 
@@ -204,10 +282,12 @@ See our [paper](paper/manuscript.md) for detailed theoretical framework.
 
 We welcome contributions! Areas of interest:
 
-1. **Test Additional Models**: Especially physics-trained models
-2. **New Test Cases**: Particularly for field theories
-3. **Biological Tests**: Extend cross-domain testing
-4. **Visualization**: Better ways to show understanding gaps
+1. **Test Additional Models**: Run batch tests on new architectures and contribute results
+2. **Model Configurations**: Add new models to `config/model_configs.yaml`
+3. **New Test Cases**: Particularly for field theories and quantum mechanics
+4. **Biological Tests**: Extend cross-domain testing to other fields
+5. **Visualization**: Better ways to show understanding gaps and comparative analysis
+6. **Analysis Tools**: Enhanced statistical analysis for multi-model comparisons
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 

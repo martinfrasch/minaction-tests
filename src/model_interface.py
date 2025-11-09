@@ -81,31 +81,33 @@ class HuggingFaceInterface(BaseModelInterface):
         response = response[len(prompt):]
         return response.strip()
 
-class OpenAIInterface(BaseModelInterface):
-    """Interface for OpenAI models"""
-    
-    def __init__(self, model_name: str = "gpt-4"):
-        import openai
-        
+class GeminiInterface(BaseModelInterface):
+    """Interface for Google Gemini models"""
+
+    def __init__(self, model_name: str = "gemini-pro"):
+        import google.generativeai as genai
+
         self.model_name = model_name
-        openai.api_key = os.environ.get("OPENAI_API_KEY")
-        if not openai.api_key:
-            raise ValueError("OPENAI_API_KEY environment variable not set")
-    
+        api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+        if not api_key:
+            raise ValueError("GEMINI_API_KEY or GOOGLE_API_KEY environment variable not set")
+
+        genai.configure(api_key=api_key)
+        self.model = genai.GenerativeModel(model_name)
+
     def generate(self, prompt: str) -> str:
-        """Generate response using OpenAI API"""
-        import openai
-        
-        response = openai.ChatCompletion.create(
-            model=self.model_name,
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant that solves physics problems."},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.7,
-            max_tokens=1000
+        """Generate response using Gemini API"""
+        # Add system instruction as part of the prompt
+        full_prompt = "You are a helpful assistant that solves physics problems.\n\n" + prompt
+
+        response = self.model.generate_content(
+            full_prompt,
+            generation_config={
+                'temperature': 0.7,
+                'max_output_tokens': 1000,
+            }
         )
-        return response.choices[0].message.content.strip()
+        return response.text.strip()
 
 class AnthropicInterface(BaseModelInterface):
     """Interface for Anthropic Claude models"""
@@ -130,19 +132,19 @@ class AnthropicInterface(BaseModelInterface):
 
 def get_model_interface(model_name: str) -> BaseModelInterface:
     """Factory function to get the appropriate model interface"""
-    
+
     # Ollama models (contain ':')
     if ':' in model_name:
         return OllamaInterface(model_name)
-    
-    # OpenAI models
-    elif model_name.startswith('gpt'):
-        return OpenAIInterface(model_name)
-    
+
+    # Gemini models
+    elif model_name.startswith('gemini'):
+        return GeminiInterface(model_name)
+
     # Claude models
     elif model_name.startswith('claude'):
         return AnthropicInterface(model_name)
-    
+
     # Default to HuggingFace
     else:
         return HuggingFaceInterface(model_name)
