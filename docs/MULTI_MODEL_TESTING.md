@@ -15,8 +15,8 @@ The testing infrastructure now supports:
 ### 1. Test a Single Model
 
 ```bash
-# Test with Google Gemini 1.5 Pro
-python scripts/run_tests.py --model gemini-1.5-pro --suite complete --output results/gemini
+# Test with Google Gemini 2.5 Pro (latest flagship)
+python scripts/run_tests.py --model gemini-2.5-pro --suite complete --output results/gemini
 
 # Test with Claude 3.5 Sonnet
 python scripts/run_tests.py --model claude-3-5-sonnet-20241022 --suite complete
@@ -35,7 +35,7 @@ python scripts/run_batch_tests.py --config frontier_comparison --suite complete
 python scripts/run_batch_tests.py --config open_source_comparison --suite complete
 
 # Test specific models
-python scripts/run_batch_tests.py --models gemini-1.5-pro claude-3-5-sonnet-20241022 llama3.1:70b
+python scripts/run_batch_tests.py --models gemini-2.5-pro claude-3-5-sonnet-20241022 llama3.1:70b
 ```
 
 ### 3. Compare Results
@@ -56,12 +56,16 @@ python scripts/compare_models.py --input results/batch --visualize --output-dir 
 ### Proprietary Models (API Required)
 
 #### Google Gemini
-- `gemini-2.0-flash-exp` - Latest experimental Gemini
-- `gemini-1.5-pro` - Flagship Gemini with long context (recommended)
-- `gemini-1.5-flash` - Fast and efficient variant
-- `gemini-1.0-pro` - Original Gemini Pro
+- `gemini-2.5-pro` - **Latest flagship with thinking capabilities & 1M context (RECOMMENDED)**
+- `gemini-2.5-flash` - Best price-performance for 2025
+- `gemini-2.5-flash-lite` - Most cost-effective for high throughput
+- `gemini-2.5-pro-exp-03-25` - Experimental with enhanced reasoning
+- `gemini-1.5-pro` - Legacy flagship model
+- `gemini-1.5-flash` - Legacy fast model
 
 **Setup**: Set `GEMINI_API_KEY` or `GOOGLE_API_KEY` environment variable
+
+**Test Connection**: `python scripts/test_gemini_25.py`
 
 #### Anthropic Claude
 - `claude-3-5-sonnet-20241022` - Latest Claude (recommended)
@@ -106,14 +110,14 @@ Pre-configured test suites in `config/model_configs.yaml`:
 
 ### `quick_comparison`
 Fast test with diverse architectures (4 models)
-- Gemini 1.5 Flash
+- **Gemini 2.5 Flash** (latest)
 - Claude 3 Haiku
 - Qwen2-Math 7B
 - Llama 3.1 8B
 
 ### `frontier_comparison`
-Flagship models from major providers (4 models)
-- Gemini 1.5 Pro
+Flagship models from major providers - **2025 Edition** (4 models)
+- **Gemini 2.5 Pro** (latest)
 - Claude 3.5 Sonnet
 - Llama 3.1 70B
 - Mistral Large
@@ -127,11 +131,11 @@ Comprehensive open-source evaluation (5 models)
 - Phi-3 14B
 
 ### `math_specialized`
-Math-focused models (4 models)
+Math-focused models with latest Gemini (4 models)
 - Qwen2-Math 7B
 - Qwen2.5 72B
 - DeepSeek-Math 7B
-- Gemini 1.5 Pro
+- **Gemini 2.5 Pro** (latest)
 
 ### `size_scaling`
 Test effect of model size (5 models)

@@ -178,11 +178,11 @@ Overall: 5.5/9 = 61%
 
 - **Ollama**: Local models (recommended for reproduction)
 - **HuggingFace**: Direct transformer access
-- **Google Gemini API**: Gemini models (1.5 Pro, Flash, etc.)
+- **Google Gemini API**: Latest Gemini 2.5 models (Pro, Flash, Flash-Lite)
 - **Anthropic API**: Claude models
 - **Custom**: Implement `BaseModelInterface`
 
-### Example: Testing Gemini
+### Example: Testing Gemini 2.5 Pro
 
 ```python
 from src.model_interface import GeminiInterface
@@ -190,7 +190,7 @@ from src.model_interface import GeminiInterface
 # Set API key in environment
 os.environ['GEMINI_API_KEY'] = 'your-key'
 
-model = GeminiInterface("gemini-1.5-pro")
+model = GeminiInterface("gemini-2.5-pro")
 results = run_complete_suite(model, output_dir="results/gemini")
 ```
 
@@ -216,7 +216,7 @@ python scripts/compare_models.py --input results/batch --visualize
 ### Available Model Architectures
 
 **Proprietary Models**:
-- Google Gemini: Gemini 2.0 Flash, Gemini 1.5 Pro, Gemini 1.5 Flash, Gemini 1.0 Pro
+- Google Gemini: **Gemini 2.5 Pro** (latest flagship), Gemini 2.5 Flash, Gemini 2.5 Flash-Lite
 - Anthropic: Claude 3.5 Sonnet, Claude 3 Opus, Claude 3 Sonnet, Claude 3 Haiku
 
 **Open-Source Models** (via Ollama):
