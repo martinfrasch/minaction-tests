@@ -83,20 +83,19 @@ class HuggingFaceInterface(BaseModelInterface):
 
 class OpenAIInterface(BaseModelInterface):
     """Interface for OpenAI models"""
-    
+
     def __init__(self, model_name: str = "gpt-4"):
-        import openai
-        
+        from openai import OpenAI
+
         self.model_name = model_name
-        openai.api_key = os.environ.get("OPENAI_API_KEY")
-        if not openai.api_key:
+        api_key = os.environ.get("OPENAI_API_KEY")
+        if not api_key:
             raise ValueError("OPENAI_API_KEY environment variable not set")
-    
+        self.client = OpenAI(api_key=api_key)
+
     def generate(self, prompt: str) -> str:
         """Generate response using OpenAI API"""
-        import openai
-        
-        response = openai.ChatCompletion.create(
+        response = self.client.chat.completions.create(
             model=self.model_name,
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that solves physics problems."},

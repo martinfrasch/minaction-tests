@@ -1,0 +1,221 @@
+# Model configurations for minAction.net testing
+# Each model is categorized by provider and capability level
+
+models:
+  # Open-source models via Ollama (local testing)
+  ollama:
+    - name: "qwen2-math:7b"
+      display_name: "Qwen2-Math 7B"
+      description: "Specialized mathematical reasoning model"
+      size: "7B"
+      category: "open-source"
+      tested: true
+
+    - name: "qwen2.5:72b"
+      display_name: "Qwen2.5 72B"
+      description: "Latest Qwen model with enhanced reasoning"
+      size: "72B"
+      category: "open-source-large"
+      tested: false
+
+    - name: "llama3.1:70b"
+      display_name: "Llama 3.1 70B"
+      description: "Meta's flagship open model"
+      size: "70B"
+      category: "open-source-large"
+      tested: false
+
+    - name: "llama3.1:8b"
+      display_name: "Llama 3.1 8B"
+      description: "Efficient Llama variant"
+      size: "8B"
+      category: "open-source"
+      tested: false
+
+    - name: "llama3.2:3b"
+      display_name: "Llama 3.2 3B"
+      description: "Smallest Llama 3 variant"
+      size: "3B"
+      category: "open-source-small"
+      tested: false
+
+    - name: "mistral-large:latest"
+      display_name: "Mistral Large"
+      description: "Mistral AI's largest model"
+      size: "123B"
+      category: "open-source-large"
+      tested: false
+
+    - name: "mixtral:8x7b"
+      display_name: "Mixtral 8x7B"
+      description: "Mixture of experts architecture"
+      size: "47B"
+      category: "open-source-moe"
+      tested: false
+
+    - name: "deepseek-math:7b"
+      display_name: "DeepSeek-Math 7B"
+      description: "Specialized mathematical reasoning"
+      size: "7B"
+      category: "open-source-specialized"
+      tested: false
+
+    - name: "phi3:14b"
+      display_name: "Phi-3 14B"
+      description: "Microsoft's small language model"
+      size: "14B"
+      category: "open-source"
+      tested: false
+
+  # OpenAI models (API required)
+  openai:
+    - name: "gpt-4o"
+      display_name: "GPT-4o"
+      description: "Latest multimodal flagship model"
+      size: "Unknown"
+      category: "proprietary-frontier"
+      tested: false
+
+    - name: "gpt-4o-mini"
+      display_name: "GPT-4o Mini"
+      description: "Efficient GPT-4 variant"
+      size: "Unknown"
+      category: "proprietary-efficient"
+      tested: false
+
+    - name: "gpt-4-turbo"
+      display_name: "GPT-4 Turbo"
+      description: "Enhanced GPT-4 with larger context"
+      size: "Unknown"
+      category: "proprietary-frontier"
+      tested: false
+
+    - name: "gpt-4"
+      display_name: "GPT-4"
+      description: "Original GPT-4 model"
+      size: "Unknown"
+      category: "proprietary-frontier"
+      tested: false
+
+    - name: "gpt-3.5-turbo"
+      display_name: "GPT-3.5 Turbo"
+      description: "Previous generation model"
+      size: "Unknown"
+      category: "proprietary-baseline"
+      tested: false
+
+  # Anthropic Claude models (API required)
+  anthropic:
+    - name: "claude-3-5-sonnet-20241022"
+      display_name: "Claude 3.5 Sonnet"
+      description: "Latest Claude model with enhanced reasoning"
+      size: "Unknown"
+      category: "proprietary-frontier"
+      tested: false
+
+    - name: "claude-3-opus-20240229"
+      display_name: "Claude 3 Opus"
+      description: "Most capable Claude 3 model"
+      size: "Unknown"
+      category: "proprietary-frontier"
+      tested: false
+
+    - name: "claude-3-sonnet-20240229"
+      display_name: "Claude 3 Sonnet"
+      description: "Balanced performance Claude model"
+      size: "Unknown"
+      category: "proprietary-efficient"
+      tested: false
+
+    - name: "claude-3-haiku-20240307"
+      display_name: "Claude 3 Haiku"
+      description: "Fast and compact Claude variant"
+      size: "Unknown"
+      category: "proprietary-efficient"
+      tested: false
+
+  # HuggingFace models (direct inference)
+  huggingface:
+    - name: "deepseek-ai/deepseek-math-7b-instruct"
+      display_name: "DeepSeek-Math 7B Instruct"
+      description: "Math-specialized model via HF"
+      size: "7B"
+      category: "open-source-specialized"
+      tested: false
+
+    - name: "Qwen/Qwen2-Math-72B-Instruct"
+      display_name: "Qwen2-Math 72B Instruct"
+      description: "Large mathematical reasoning model"
+      size: "72B"
+      category: "open-source-large"
+      tested: false
+      requires_gpu: true
+
+    - name: "microsoft/Phi-3-medium-4k-instruct"
+      display_name: "Phi-3 Medium"
+      description: "Microsoft's medium-sized model"
+      size: "14B"
+      category: "open-source"
+      tested: false
+
+# Recommended test configurations
+test_configs:
+  quick_comparison:
+    description: "Quick test with diverse architectures"
+    models:
+      - "gpt-4o-mini"
+      - "claude-3-haiku-20240307"
+      - "qwen2-math:7b"
+      - "llama3.1:8b"
+
+  frontier_comparison:
+    description: "Test frontier/flagship models"
+    models:
+      - "gpt-4o"
+      - "claude-3-5-sonnet-20241022"
+      - "llama3.1:70b"
+      - "mistral-large:latest"
+
+  open_source_comparison:
+    description: "Compare open-source models"
+    models:
+      - "qwen2-math:7b"
+      - "llama3.1:70b"
+      - "mixtral:8x7b"
+      - "deepseek-math:7b"
+      - "phi3:14b"
+
+  math_specialized:
+    description: "Test math-specialized models"
+    models:
+      - "qwen2-math:7b"
+      - "qwen2.5:72b"
+      - "deepseek-math:7b"
+      - "gpt-4o"
+
+  size_scaling:
+    description: "Test effect of model size"
+    models:
+      - "llama3.2:3b"
+      - "llama3.1:8b"
+      - "llama3.1:70b"
+      - "qwen2-math:7b"
+      - "qwen2.5:72b"
+
+  all_available:
+    description: "Test all available models (expensive!)"
+    models: []  # Will be populated with all models
+
+# API configuration
+api_requirements:
+  openai:
+    env_var: "OPENAI_API_KEY"
+    base_url: "https://api.openai.com/v1"
+
+  anthropic:
+    env_var: "ANTHROPIC_API_KEY"
+    base_url: "https://api.anthropic.com"
+
+  ollama:
+    base_url: "http://localhost:11434"
+    requires_local: true
