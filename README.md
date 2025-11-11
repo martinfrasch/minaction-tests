@@ -1,3 +1,191 @@
+# Network-Weighted Gauge Theory: An AI-Assisted Exploration
+
+## 🚨 Important Technical Note
+
+**This repository contains exploratory computational work that requires mathematical reformulation.** During peer review, experts correctly identified that our discretization approach is not valid for arbitrary graphs. We're actively seeking collaborators with expertise in:
+
+- **Discrete exterior calculus** on graphs
+- **Cochain complexes** for gauge theory
+- **Lattice gauge theory** on irregular graphs  
+- **Graph homology** and cycle bases
+
+If you have this expertise and find the patterns interesting, please contact: mfrasch@uw.edu
+
+---
+
+## Overview
+
+This repository documents an AI-assisted exploration of gauge theory on network topologies, conducted through human-AI collaboration with Claude (Anthropic). While our initial mathematical framework requires correction, the work demonstrates:
+
+1. **Novel AI collaboration methodology** for theoretical physics
+2. **Interesting computational patterns** that may survive proper formalization
+3. **Both successes and pitfalls** of AI-assisted research
+
+## Key Findings (Requiring Validation)
+
+Our computational experiments revealed intriguing patterns:
+- Non-monotonic coupling dependence in three regimes
+- Hierarchy between topological and local observables
+- Topology-dependent scaling relationships
+
+**However**, these findings used incorrect discretization (see Technical Issues below).
+
+## Known Technical Issues 🔴
+
+### 1. Invalid Discretization for Graphs
+```python
+# CURRENT (INCORRECT for arbitrary graphs):
+A_transformed = A + np.gradient(Lambda)
+
+# NEEDED (proper graph discretization):
+A_transformed = A + incidence_matrix @ Lambda
+```
+
+### 2. Wilson Loop Invariance is Tautological
+- Wilson loops are gauge-invariant by construction
+- Their invariance doesn't demonstrate emergent symmetry
+- Need to examine dynamical distributions instead
+
+### 3. Missing Proper Gauge Structure
+- Should use link variables U_ij ∈ U(1), not site variables
+- Need gauge-covariant network penalties
+- Requires proper cycle basis for non-planar graphs
+
+### 4. Possible Optimization Artifacts
+- "Phase transitions" lack finite-size scaling analysis
+- Could be regularization effects, not genuine phases
+- Need Binder cumulants and susceptibility peaks
+
+## Repository Structure
+
+```
+minaction-tests/
+├── code/
+│   ├── current_implementation.py  # Original (flawed) implementation
+│   ├── issues_identified.md       # Detailed technical problems
+│   └── proper_discretization/     # Space for corrected version (help needed!)
+├── results/
+│   ├── computational_patterns/    # Interesting patterns found
+│   └── validation_needed/         # Results requiring proper math
+├── docs/
+│   ├── ai_methodology.md         # How we used AI collaboration
+│   └── physics_questions.md      # Open questions for collaborators
+└── manuscripts/
+    ├── cs_ai_version.tex         # AI methodology paper
+    └── physics_version_draft.tex # Awaiting proper formulation
+```
+
+## How to Contribute
+
+We explicitly invite collaboration to:
+
+### For Physicists/Mathematicians:
+1. **Implement proper discretization** using cochain complexes
+2. **Define cycle bases** for Wilson loops on non-planar graphs  
+3. **Add finite-size scaling** analysis
+4. **Test if patterns persist** with correct mathematics
+
+### For AI/ML Researchers:
+1. **Extend AI collaboration methodology** to other domains
+2. **Improve pattern recognition** approaches
+3. **Develop validation frameworks** for AI-assisted theory
+
+### Getting Started:
+```bash
+git clone https://github.com/martinfrasch/minaction-tests
+cd minaction-tests
+pip install -r requirements.txt
+
+# Run original (flawed) implementation
+python code/current_implementation.py
+
+# See identified issues
+cat code/issues_identified.md
+
+# Help us implement proper version!
+cd code/proper_discretization/
+```
+
+## Current Status
+
+- ✅ AI methodology paper submitted to arXiv cs.AI
+- ⚠️ Physics results need mathematical reformulation
+- 🔄 Actively seeking collaborators
+- 📖 Complete documentation of issues and patterns
+
+## Why This Repository Matters
+
+Even with mathematical flaws, this work demonstrates:
+1. **How AI can accelerate theoretical exploration** (10-100x faster prototyping)
+2. **The importance of domain expertise** (AI found patterns but also made errors)
+3. **Value of transparency** in scientific process
+4. **Potential for interdisciplinary collaboration**
+
+## Papers
+
+- **AI Methodology:** "AI-Assisted Theoretical Physics Exploration" (arXiv cs.AI, 2024)
+- **Physics Paper:** In preparation, pending proper mathematical formulation
+
+## The Patterns We Found
+
+Despite mathematical issues, we observed:
+
+### Non-Monotonic Coupling Dependence
+- Weak regime (κ < 0.001): Perturbative behavior
+- Intermediate (0.001 < κ < 0.5): Symmetry-breaking "desert"  
+- Strong (κ > 0.5): Network-dominated regime
+
+### Hierarchical Observable Behavior
+- Wilson loops: ~10^-15 variation (but this is tautological)
+- Local fields: ~30% variation (but using wrong discretization)
+
+### Questions for Proper Investigation:
+1. Do these regimes exist with proper cochain discretization?
+2. Is non-monotonicity real or an artifact?
+3. How do patterns change on different graph topologies?
+
+## Contact & Collaboration
+
+**Martin G. Frasch**  
+Institute on Human Development and Disability  
+University of Washington  
+Email: mfrasch@uw.edu  
+ORCID: 0000-0003-3159-6321
+
+**Seeking experts in:**
+- Discrete differential geometry
+- Lattice gauge theory
+- Graph theory and topology
+- Critical phenomena and phase transitions
+
+## Citation
+
+If you use or build upon this work:
+
+```bibtex
+@article{frasch2024ai,
+  title={AI-Assisted Theoretical Physics Exploration: A Case Study in Network-Weighted Gauge Theory},
+  author={Frasch, Martin G.},
+  journal={arXiv preprint arXiv:2024.xxxxx},
+  year={2024},
+  note={Manuscript acknowledges mathematical issues requiring reformulation}
+}
+```
+
+## License
+
+MIT License - Use freely but please acknowledge limitations
+
+## Acknowledgments
+
+- Claude (Anthropic) for AI collaboration
+- Peer reviewers who identified critical mathematical issues
+- Future collaborators who will help fix the mathematics
+
+---
+
+**Note:** This is living research. We've identified problems and are working to solve them. Science is a process, not just polished results. Join us in making this right! 🔬
+
 # minAction-LLM-Physics-Tests
 
 Testing whether mathematical language models understand physical selection principles through variational mechanics.
