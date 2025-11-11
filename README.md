@@ -186,6 +186,7 @@ MIT License - Use freely but please acknowledge limitations
 
 **Note:** This is living research. We've identified problems and are working to solve them. Science is a process, not just polished results. Join us in making this right! 🔬
 
+
 # minAction-LLM-Physics-Tests
 
 Testing whether mathematical language models understand physical selection principles through variational mechanics.
