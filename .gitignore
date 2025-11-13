@@ -1,0 +1,84 @@
+# API Keys and Credentials
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.json
+service-account*.json
+*-credentials.json
+api-keys.txt
+secrets.txt
+.secrets
+*.secret
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+.virtualenv
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+*-checkpoint.ipynb
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Test results and caches
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# Model outputs and results
+results/batch/
+results/*/detailed_results.json
+results/*/raw_outputs/
+*.log
+
+# Large model files
+*.bin
+*.gguf
+*.safetensors
+models/
+
+# OS
+Thumbs.db
+.DS_Store
+*.bak
+*.tmp
